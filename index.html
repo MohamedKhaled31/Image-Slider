@@ -4,211 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GalleryLoop</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background-color: #000;
-        font-family: Arial, sans-serif;
-      }
-
-      .slider {
-        position: relative;
-        max-width: 800px;
-        margin: 50px auto;
-        overflow: hidden;
-      }
-
-      .slides {
-        position: relative;
-        height: 500px;
-      }
-
-      .slide {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-        transform: scale(1.05);
-        z-index: 0;
-      }
-
-      .slide.active {
-        opacity: 1;
-        z-index: 1;
-        animation: parallaxFade 5s ease-in-out forwards;
-      }
-
-      .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1.2);
-        transition: transform 1s ease-in-out;
-      }
-
-      .slide.active img {
-        transform: scale(1.05) translateX(-10px);
-      }
-
-      @keyframes parallaxFade {
-        0% {
-          opacity: 0;
-          transform: scale(1.1) translateX(20px);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1.05) translateX(0);
-        }
-      }
-
-      .caption {
-        position: absolute;
-        bottom: 15px;
-        left: 20px;
-        color: #fff;
-        font-size: 14px;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 5px 10px;
-        border-radius: 5px;
-      }
-
-      .arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.3);
-        color: #fff;
-        font-size: 30px;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 2;
-        border-radius: 50%;
-        user-select: none;
-      }
-
-      .arrow:hover {
-        background: rgba(255, 255, 255, 0.6);
-      }
-
-      .arrow.left {
-        left: 10px;
-      }
-
-      .arrow.right {
-        right: 10px;
-      }
-
-      .dots {
-        text-align: center;
-        margin-top: 10px;
-      }
-
-      .dot {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        margin: 0 5px;
-        background: #777;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .dot.active {
-        background: #fff;
-      }
-
-      @media (max-width: 600px) {
-        .slider {
-          max-width: 100%;
-        }
-        .slides {
-          height: 300px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="slider">
-      <div class="slides">
-        <div class="slide active">
-          <img src="imgs/777759.jpg" alt="Art 1" />
-          <div class="caption">Art Piece 1</div>
+    <div class="gallery-loop">
+      <h1 class="logo">GalleryLoop</h1>
+      <div class="slider">
+        <div class="slides fade">
+          <img src="imgs/1.jpg" alt="The Red IceCream" />
+          <div class="caption">IceCream<br /></div>
         </div>
-        <div class="slide">
-          <img src="imgs/loop.jpeg" alt="Art 2" />
-          <div class="caption">Art Piece 2</div>
+        <div class="slides fade">
+          <img src="imgs/candy2.jpg" alt="IceCream" />
+          <div class="caption">IceCream<br /></div>
         </div>
-        <div class="slide">
-          <img src="imgs/images.jpeg" alt="Art 3" />
-          <div class="caption">Art Piece 3</div>
+        <div class="slides fade">
+          <img src="imgs/candy.jpg" alt="IceCream" />
+          <div class="caption">IceCream<br /></div>
         </div>
+        <div class="slides fade">
+          <img src="imgs/candy3.jpg" alt="IceCream" />
+          <div class="caption">IceCream<br /></div>
+        </div>
+        <div class="slides fade">
+          <img src="imgs/candy4.jpg" alt="IceCream" />
+          <div class="caption">IceCream<br /></div>
+        </div>
+        <!-- arrows -->
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
       </div>
-
-      <div class="arrow left">&#10094;</div>
-      <div class="arrow right">&#10095;</div>
-
-      <div class="dots">
-        <span class="dot active"></span>
+      <div class="dots-container">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
       </div>
     </div>
-
-    <script>
-      const slides = document.querySelectorAll(".slide");
-      const dots = document.querySelectorAll(".dot");
-      const leftArrow = document.querySelector(".arrow.left");
-      const rightArrow = document.querySelector(".arrow.right");
-      let currentIndex = 0;
-      let interval = setInterval(nextSlide, 5000);
-
-      function showSlide(index) {
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === index);
-          dots[i].classList.toggle("active", i === index);
-        });
-      }
-
-      function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
-      }
-
-      function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        showSlide(currentIndex);
-      }
-
-      dots.forEach((dot, i) => {
-        dot.addEventListener("click", () => {
-          currentIndex = i;
-          showSlide(currentIndex);
-          resetInterval();
-        });
-      });
-
-      leftArrow.addEventListener("click", () => {
-        prevSlide();
-        resetInterval();
-      });
-
-      rightArrow.addEventListener("click", () => {
-        nextSlide();
-        resetInterval();
-      });
-
-      function resetInterval() {
-        clearInterval(interval);
-        interval = setInterval(nextSlide, 5000);
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -1,0 +1,143 @@
+/* Reset Body */
+body {
+    margin: 0;
+    background-color: #000;
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Wrapper */
+.gallery-loop {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Logo */
+.logo {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Slider Container */
+.slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Each Slide */
+.slides {
+    display: none;
+    position: relative;
+}
+
+/* Images */
+.slides img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Caption */
+.caption {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* Navigation Arrows */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 14px;
+    color: white;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Dots */
+.dots-container {
+    margin-top: 16px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    margin: 0 4px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+}
+
+.dot.active,
+.dot:hover {
+    opacity: 1;
+}
+
+/* Fade Animation */
+.fade {
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {
+        opacity: 0.4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .caption {
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+
+    .prev,
+    .next {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
